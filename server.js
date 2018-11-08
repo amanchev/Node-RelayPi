@@ -8,24 +8,27 @@ const relays = [new Gpio(17, 'high'), new Gpio(18, 'high'),new Gpio(27, 'high'),
 app.get('/status/:relayNumber', function (req, res) {
   let relayNumber = parseInt(req.params.relayNumber); 
   let status;
-  console.log('Get status of relay #' + req.params.relayNumber);
+  console.log('Get status of relay #' + relayNumber);
   status = relays[relayNumber].readSync();
-  console.log(typeof(status));
-  res.send('Status of relay #'+ relayNumber + ' = ' + (status === 0 ? 'ON':'OFF'));
+  console.log((status === 0 ? 'ON':'OFF'));
+  res.send({
+    message:'Status of relay #'+ relayNumber + ' = ' + (status === 0 ? 'ON':'OFF'),
+    relayStatus: (status === 0 ? 'ON':'OFF')
+  });
 });
 
 app.post('/on/:relayNumber', function (req, res) {
   let relayNumber = parseInt(req.params.relayNumber);  
-  console.log('Turn ON relay #' + req.params.relayNumber);
+  console.log('Turn ON relay #' + relayNumber);
   relays[relayNumber].writeSync(0);
-  res.send('Turn ON relay #' + req.params.relayNumber);;
+  res.send('Relay #' + (relayNumber+1) + ' was turned ON');;
 });
 
 app.post('/off/:relayNumber', function (req, res) {
   let relayNumber = parseInt(req.params.relayNumber);
   console.log('Turn OFF relay #' + relayNumber);
   relays[relayNumber].writeSync(1);
-  res.send('Turn OFF relay #' + relayNumber);
+  res.send('Relay #' + (relayNumber+1) + ' was turned OFF');
 });
 
 app.use(express.static('public'));
