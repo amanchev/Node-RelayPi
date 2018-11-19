@@ -1,3 +1,7 @@
+body {
+    font-family: 'Londrina Solid', cursive;
+}
+
 .container {
     float: right;
     width: 50%;
