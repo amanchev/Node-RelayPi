@@ -2,7 +2,11 @@ body {
     font-family: 'Londrina Solid', cursive;
 }
 
-.container {
+.weather-container{
+  height: 300px;
+}
+
+.switch-container {
     float: right;
     width: 50%;
 }
@@ -13,6 +17,7 @@ body {
   display: block;
   height: 34px;
   font-size: 22px;
+  margin-bottom: 8px;
 }
 
 /* Hide default HTML checkbox */
